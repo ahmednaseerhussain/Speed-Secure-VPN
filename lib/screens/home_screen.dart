@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             },
           ),
 
-          // title: Text('SpeedSecure VPN',style: TextStyle(fontWeight: FontWeight.bold),),
+    
           centerTitle: true,
           backgroundColor: Color(0xff13162b),
 
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Get.to(() => LocationScreen());
                 },
-                icon: Icon(CupertinoIcons.globe, color: Colors.white, size: 28),
+                icon: Icon(Icons.language, color: Colors.white, size: 28),
               ),
             ),
           ],
@@ -78,7 +78,6 @@ class HomeScreen extends StatelessWidget {
                 : null,
         drawer: DrawerWidget(),
 
-        // bottomNavigationBar: _changeLocation(context),
 
         //body
         body: Padding(
@@ -223,44 +222,4 @@ class HomeScreen extends StatelessWidget {
         ],
       );
 
-  //bottom nav to change location
-  // Widget _changeLocation(BuildContext context) => SafeArea(
-  //         child: Semantics(
-  //       button: true,
-  //       child: InkWell(
-  //         onTap: () => Get.to(() => LocationScreen()),
-  //         child: Container(
-  //             color: Theme.of(context).bottomNav,
-  //             padding: EdgeInsets.symmetric(horizontal: mq.width * .04),
-  //             height: 60,
-  //             child: Row(
-  //               children: [
-  //                 //icon
-  //                 Icon(CupertinoIcons.globe, color: Colors.white, size: 28),
-
-  //                 //for adding some space
-  //                 SizedBox(width: 10),
-
-  //                 //text
-  //                 Text(
-  //                   'Change Location',
-  //                   style: TextStyle(
-  //                       color: Colors.white,
-  //                       fontSize: 18,
-  //                       fontWeight: FontWeight.w500),
-  //                 ),
-
-  //                 //for covering available spacing
-  //                 Spacer(),
-
-  //                 //icon
-  //                 CircleAvatar(
-  //                   backgroundColor: Colors.white,
-  //                   child: Icon(Icons.keyboard_arrow_right_rounded,
-  //                       color: Color(0xff13152a), size: 26),
-  //                 )
-  //               ],
-  //             )),
-  //       ),
-  //     ));
 }

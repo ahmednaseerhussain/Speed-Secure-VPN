@@ -38,6 +38,7 @@ class HomeController extends GetxController {
       AdHelper.showInterstitialAd(onComplete: () async {
         await VpnEngine.startVpn(vpnConfig);
       });
+        await VpnEngine.startVpn(vpnConfig);
     } else {
       await VpnEngine.stopVpn();
     }
@@ -56,18 +57,4 @@ class HomeController extends GetxController {
         return Colors.orangeAccent;
     }
   }
-
-  // vpn button text
-  // String get getButtonText {
-  //   switch (vpnState.value) {
-  //     case VpnEngine.vpnDisconnected:
-  //       return 'Tap to Connect';
-
-  //     case VpnEngine.vpnConnected:
-  //       return 'Disconnect';
-
-  //     default:
-  //       return 'Connecting...';
-  //   }
-  // }
 }

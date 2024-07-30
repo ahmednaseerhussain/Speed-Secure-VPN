@@ -40,11 +40,15 @@ class VpnCard extends StatelessWidget {
             }
           },
           borderRadius: BorderRadius.circular(15),
-          child: Container( decoration: BoxDecoration(color: Color(0xff5a6a86), borderRadius: BorderRadius.circular(15),),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xff5a6a86),
+              borderRadius: BorderRadius.circular(15),
+            ),
             child: ListTile(
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+
               //flag
               leading: Container(
                 padding: EdgeInsets.all(.5),
@@ -60,30 +64,26 @@ class VpnCard extends StatelessWidget {
                       fit: BoxFit.cover),
                 ),
               ),
-            
+
               //title
               title: Text(vpn.countryLong),
-            
+
               //subtitle
               subtitle: Row(
                 children: [
                   Icon(Icons.speed_rounded, color: Colors.blue, size: 20),
                   SizedBox(width: 4),
-                  Text(_formatBytes(vpn.speed, 1), style: TextStyle(fontSize: 13))
+                  Text(_formatBytes(vpn.speed, 1),
+                      style: TextStyle(fontSize: 13))
                 ],
               ),
-            
+
               //trailing
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(vpn.numVpnSessions.toString(),
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).lightText)),
-                  SizedBox(width: 4),
-                  Icon(CupertinoIcons.person_3, color: Colors.blue),
+                  _buildSpeedSignalIcon(vpn.speed),
+                  
                 ],
               ),
             ),
@@ -96,5 +96,28 @@ class VpnCard extends StatelessWidget {
     const suffixes = ['Bps', "Kbps", "Mbps", "Gbps", "Tbps"];
     var i = (log(bytes) / log(1024)).floor();
     return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+  }
+
+  Widget _buildSpeedSignalIcon(int speed) {
+    const speedThresholds = [
+      1024 * 10,
+      1024 * 100,
+      1024 * 1000
+    ]; // thresholds for Kbps, Mbps, Gbps
+    IconData iconData;
+
+    if (speed < speedThresholds[0]) {
+      iconData = Icons.signal_cellular_alt_1_bar;
+    } else if (speed < speedThresholds[1]) {
+      iconData = Icons.signal_cellular_alt_2_bar;
+    } else {
+      iconData = Icons.signal_cellular_alt;
+    }
+
+    return Icon(
+      iconData,
+      color: Color.fromARGB(255, 6, 224, 108),
+      size: mq.height * 0.04,
+    );
   }
 }

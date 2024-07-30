@@ -17,8 +17,6 @@ dependencies:
   # Getx for state management
   get: ^4.6.6
 
-  # Cupertino style icons
-  cupertino_icons: ^1.0.8
 
   # For API Call
   http: ^1.2.1
@@ -26,8 +24,7 @@ dependencies:
   # Converting CSV data to List
   csv: ^6.0.0
 
-  # For Lottie Animation
-  lottie: ^3.1.2
+
 
   # For storing data (in local storage) 
   hive: ^2.2.3
