@@ -8,15 +8,23 @@ import '../helpers/pref.dart';
 import '../models/vpn.dart';
 import '../models/vpn_config.dart';
 import '../services/vpn_engine.dart';
+import 'location_controller.dart'; // Import the LocationController
 
 class HomeController extends GetxController {
   final Rx<Vpn> vpn = Pref.vpn.obs;
   final vpnState = VpnEngine.vpnDisconnected.obs;
+  final LocationController locationController = Get.put(LocationController());
 
   void connectToVpn() async {
+    // Automatically select the first VPN if none is selected
     if (vpn.value.openVPNConfigDataBase64.isEmpty) {
-      MyDialogs.info(msg: 'Select a Location by clicking \'Change Location\'');
-      return;
+      await locationController.getVpnData(); // Ensure VPN data is loaded
+      if (locationController.vpnList.isNotEmpty) {
+        vpn.value = locationController.vpnList.first; // Auto-select the first available VPN
+      } else {
+        MyDialogs.info(msg: 'No VPN servers available to connect.');
+        return;
+      }
     }
 
     if (vpnState.value == VpnEngine.vpnDisconnected) {
